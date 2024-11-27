@@ -1,0 +1,46 @@
+---
+import Parser from 'rss-parser';
+
+const parser = new Parser();
+const MEDIUM_FEED_URL = `https://medium.com/feed/@rajeshdsouza07`; // Replace with your Medium username
+
+let posts = [];
+try {
+  const feed = await parser.parseURL(MEDIUM_FEED_URL);
+  posts = feed.items.map(post => ({
+    title: post.title,
+    link: post.link,
+    pubDate: new Date(post.pubDate).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }),
+    description: post.contentSnippet?.slice(0, 150) + '...'
+  }));
+} catch (error) {
+  console.error('Error fetching Medium posts:', error);
+}
+---
+
+<div class="grid gap-6">
+  {posts.map(post => (
+    <a 
+      href={post.link} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      class="block bg-[#1A1D24] p-8 rounded-lg hover:bg-[#1A1D24]/80 transition-colors"
+    >
+      <h2 class="text-2xl font-bold mb-2">{post.title}</h2>
+      <p class="text-gray-400 mb-4">{post.description}</p>
+      <div class="flex justify-between items-center">
+        <span class="text-[#00DC82] flex items-center gap-2">
+          Read More 
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </span>
+        <span class="text-gray-400">{post.pubDate}</span>
+      </div>
+    </a>
+  ))}
+</div>
