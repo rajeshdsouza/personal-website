@@ -1,5 +1,6 @@
 ---
 import Parser from 'rss-parser';
+import fetch from 'node-fetch';
 
 const MEDIUM_USERNAME = 'rajeshdsouza07';
 const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
@@ -7,8 +8,11 @@ const MEDIUM_FEED_URL = `${CORS_PROXY}${encodeURIComponent(`https://medium.com/f
 
 let posts = [];
 try {
+  const response = await fetch(MEDIUM_FEED_URL);
+  const xmlText = await response.text();
+  
   const parser = new Parser();
-  const feed = await parser.parseURL(MEDIUM_FEED_URL);
+  const feed = await parser.parseString(xmlText);
   
   posts = feed.items.map(item => ({
     title: item.title || '',
