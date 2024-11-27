@@ -1,0 +1,37 @@
+---
+const { pathname } = Astro.url;
+const navItems = [
+  { text: "My Work", href: "/work" },
+  { text: "Blog", href: "/blog" },
+  { text: "Projects", href: "/projects" },
+];
+---
+<header class="fixed w-full top-0 bg-black/50 backdrop-blur-sm z-50">
+  <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="/" class:list={["text-2xl font-bold", pathname === "/" ? "text-[#00DC82]" : "text-white hover:text-[#00DC82]"]}>RD</a>
+    <div class="flex gap-8 items-center">
+      {navItems.map(item => (
+        <a 
+          href={item.href} 
+          class:list={[
+            "transition-colors",
+            pathname === item.href ? "text-[#00DC82]" : "text-white hover:text-[#00DC82]"
+          ]}
+        >
+          {item.text}
+        </a>
+      ))}
+      <a 
+        href="/contact" 
+        class:list={[
+          "px-6 py-2 rounded-md transition-colors",
+          pathname === "/contact" 
+            ? "bg-[#00DC82] text-black" 
+            : "bg-[#00DC82] text-black hover:bg-[#00DC82]/90"
+        ]}
+      >
+        Contact
+      </a>
+    </div>
+  </nav>
+</header>

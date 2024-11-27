@@ -1,0 +1,69 @@
+---
+interface WorkEntry {
+  company: string;
+  role: string;
+  period: string;
+  description: string;
+  achievements: string[];
+  links?: { text: string; url: string; }[];
+}
+
+const workExperience: WorkEntry[] = [
+  {
+    company: "First Venture",
+    role: "Founder · Full Time",
+    period: "Feb 2024 - Present · 11 months",
+    description: "",
+    achievements: [
+      "I work with 2 startups within the founder's office, I handle partnerships, sales, customer success and content writing.",
+      "Created infrastructure to enable mass outbound—scaled outbound reach from 0-3000 emails/per day.",
+      "Developed an automated blog creation system using RPA tools, scraping content from a leading news site, processing it to be AI-undetectable, and publishing on Webflow. I've added it as a project, you can check it out here.",
+      "Set up automated customer outreach (email, LinkedIn, and Social media platforms) & customer success systems using Airtable, make.com & ZeroWork."
+    ]
+  },
+  {
+    company: "Jackett/CoTeach",
+    role: "Business Development/Customer Support · Full-time",
+    period: "Aug 2021 - Nov 2023 · 2 years 4 months",
+    description: "",
+    achievements: [
+      "Conducted 100+ demos, converting ~20% to customers, and maintained 70% retention rate.",
+      "Set up automations to acknowledge bugs and user feedback, saving ~20 hours per week.",
+      "Collaborated with the product and engineering team to help prioritize bugs and features on the product roadmap leveraging user data(Mixpanel & UXCam) and feedback from customer development calls.",
+      "Set up automations to acknowledge bugs and user feedback, saving ~20 hours per week.",
+      "Jackett pivoted to <a href=\"https://coteach.io/\" class=\"text-[#00DC82]\">CoTeach</a>. Secured 5 pilot partnerships with major content creators (5M+ total subscribers) through strategic multi-platform outreach within one month."
+    ]
+  },
+  {
+    company: "Multiple Internships(Mintifi, Tommy Hilfiger, Sertumer)",
+    role: "Full-time · Part Time",
+    period: "Jun 2021 - Dec 2021 · 6 months",
+    description: "",
+    achievements: [
+      "<a href=\"https://www.mintifi.com/\" class=\"text-[#00DC82]\">Mintifi</a> is a fin-tech company that provides loans to SMBs that banks find too risky to touch.",
+      "Generated $300,000 USD in revenue by independently owning the entire sales cycle for Mintifi.",
+      "Collaborated cross-functionally to ensure timely lender compliance.",
+      "Reached $2 in annual sales performance at Tommy Hilfiger, achieving this milestone in just 9 months of joining.",
+      "Entrusted with critical store responsibilities: opening/closing operations, cash management, and direct bank deposits for business accounts.",
+      "Sertumer is a med-tech company. I was responsible for B2B & B2C sales, setting up e-com stores and procurement."
+    ]
+  }
+];
+---
+
+<div class="space-y-16">
+  {workExperience.map((entry) => (
+    <div class="space-y-4">
+      <div class="flex justify-between items-start">
+        <h2 class="text-2xl font-bold">{entry.company}</h2>
+        <span class="text-gray-400">{entry.period}</span>
+      </div>
+      <p class="text-gray-400">{entry.role}</p>
+      <ul class="list-disc list-inside space-y-3 text-gray-300">
+        {entry.achievements.map((achievement) => (
+          <li set:html={achievement} />
+        ))}
+      </ul>
+    </div>
+  ))}
+</div>
